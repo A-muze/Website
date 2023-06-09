@@ -2,17 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat App</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-messages" id="chat-messages"></div>
-    <input type="text" id="message-input" placeholder="Type your message...">
-    <button id="send-button">Send</button>
+
+  <div class="header">
+    <h1>Weather App</h1>
+  </div>
+
+  <div class="container">
+
+    <div id="background"></div>
+    <div class="layout1">
+      <form class="search-form">
+        <input id="search" placeholder="Search">
+        <button type="button" id="search-btn"><i class="fas fa-search"></i></button>
+      </form>
+      <h2 class="h1-clock"></h2>
+      <div id="weather-container"></div>
+    </div>
+    <div class="layout2">
+      <div class="container2">
+        <div id="weather-container2"></div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
+  <script src="https://kit.fontawesome.com/1b2238335d.js"></script>
 </body>
+
 </html>
