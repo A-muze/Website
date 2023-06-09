@@ -97,7 +97,7 @@ function setWeatherBackground(iconCode) {
     setTimeout(() => {
       bodyElement.style.backgroundImage = backgroundUrl;
       bodyElement.style.opacity = 1;
-    }, 800);
+    }, 500);
   }
 }
 
