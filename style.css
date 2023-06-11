@@ -4,11 +4,13 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   transition: background-image 1s ease;
-  height: 90vh;  
 }
 
-.header {
-  height: 6vh;
+#date {
+  position: relative;
+  left: 380%;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 h1 {
@@ -21,16 +23,14 @@ h1 {
   transform: translate(0%, 10%);
 }
 
-.layout1, .header {
-  background-color: rgba(0, 0, 0, 0.589);
-}
-
 .layout1 {
+  position: relative;
   float: left;
   width: 20%;
-  height: 94vh;
+  height: 100vh;
   color: white;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.589);
 }
 
 .layout1 input {
@@ -57,9 +57,14 @@ button {
 
 .layout2 {
   float: right;
-  color: white;
+  color: rgb(255, 255, 255);
   background-color: var(--background-color);
   display: var(--display);
+}
+
+#weather-container, input, button {
+  position: relative;
+  top: 50px;
 }
 
 #weather-container {

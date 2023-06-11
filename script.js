@@ -1,7 +1,8 @@
 const weatherContainer = document.getElementById('weather-container');
-const minidisplay = document.getElementById("weather-container2")
+const minidisplay = document.getElementById("weather-container2");
 const locationInput = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
+const dateElement = document.getElementById('date');
 
 searchBtn.addEventListener('click', function() {
   const location = locationInput.value;
@@ -14,6 +15,9 @@ searchBtn.addEventListener('click', function() {
       displayWeather(data);
       miniDisplay(data);
       setWeatherBackground(data.weather[0].icon);
+      displayDate();
+
+      console.log(data);
     })
     .catch(error => {
       weatherContainer.innerHTML = '오류 발생: ' + error;
@@ -36,13 +40,12 @@ function miniDisplay(data) {
 
   minidisplay.innerHTML = '';
   minidisplay.appendChild(temperature);
-  
   minidisplay.appendChild(cityName);
   minidisplay.appendChild(weatherIcon);
 }
 
 function displayWeather(data) {
-  const { name, main, wind, weather } = data;
+  const { main, wind, weather, clouds } = data;
 
   const temperature_Max = document.createElement('p');
   temperature_Max.innerHTML = `<i class="fas fa-temperature-high"></i> ${main.temp_max} °C`;
@@ -58,12 +61,21 @@ function displayWeather(data) {
   const iconClass = getWeatherIconClass(iconCode);
   weatherIcon.className = iconClass;
 
+  const cloudiness = document.createElement('p');
+  cloudiness.innerHTML = `<i class="fa-solid fa-cloud"></i> ${clouds.all}%`;
+
+  const humidity = document.createElement('p');
+  humidity.innerHTML = `<i class="fas fa-tint"></i> ${main.humidity}%`;
+
   weatherContainer.innerHTML = '';
   weatherContainer.appendChild(weatherIcon);
   weatherContainer.appendChild(temperature_Max);
   weatherContainer.appendChild(temperature_Min);
   weatherContainer.appendChild(Wind);
+  weatherContainer.appendChild(cloudiness);
+  weatherContainer.appendChild(humidity);
 }
+
 
 function setWeatherBackground(iconCode) {
   const weatherBackgroundMap = {
@@ -93,17 +105,13 @@ function setWeatherBackground(iconCode) {
   const currentBackgroundUrl = bodyElement.style.backgroundImage;
 
   if (backgroundUrl !== currentBackgroundUrl) {
-    bodyElement.style.opacity = 1;
+    bodyElement.style.backgroundImage.opacity = 1;
     setTimeout(() => {
       bodyElement.style.backgroundImage = backgroundUrl;
-      bodyElement.style.opacity = 1;
+      bodyElement.style.backgroundImage.opacity = 1;
     }, 500);
   }
 }
-
-  if (weatherIcon) {
-    weatherContainer.firstChild.className = weatherIcon;
-  }
 
 function getWeatherIconClass(iconCode) {
   const weatherIconMap = {
@@ -128,4 +136,11 @@ function getWeatherIconClass(iconCode) {
   };
 
   return weatherIconMap[iconCode] || '';
+}
+
+function displayDate() {
+  const currentDate = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = currentDate.toLocaleDateString(undefined, options);
+  dateElement.textContent = formattedDate;
 }
