@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,24 +8,51 @@
   <title>Weather App</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div id="background"></div>
 
-  <div class="container">
+  <div class="layout1">
 
-    <div id="background"></div>
-    <div class="layout1">
-      <form class="search-form">
-        <input id="search" placeholder="Search">
-        <button type="button" id="search-btn"><i class="fas fa-search"></i></button>
-      </form>
+    <form class="search-form">
+      <input id="search" placeholder="Search">
+      <button type="button" id="search-btn"><i class="fas fa-search"></i></button>
+    </form>
+    
+    <div id="weather-container">
       <div id="date"></div>
-      <div id="weather-container"></div>
-    </div>
-    <div class="layout2">
-      <div class="container2">
-        <div id="weather-container2"></div>
+      <div class="weather-info">
+        <i class="fas fa-temperature-high"></i>
+        <p id="max-temp"></p>
+      </div>
+      <div class="weather-info">
+        <i class="fas fa-temperature-low"></i>
+        <p id="min-temp"></p>
+      </div>
+      <div class="weather-info">
+        <i class="fas fa-wind"></i>
+        <p id="wind"></p>
+      </div>
+      <div class="weather-info">
+        <i class="fas fa-tint"></i>
+        <p id="humidity"></p>
+      </div>
+      <div class="weather-info">
+        <i class="fa-solid fa-cloud"></i>
+        <p id="clouds"></p>
       </div>
     </div>
+
+  </div>
+
+  <div class="layout2">
+
+    <div id="weather-container2">
+      <i id="Icon"></i>
+      <h2 id="cityName"></h2>
+      <p id="temp"></p>
+    </div>
+
   </div>
 
   <script src="script.js"></script>

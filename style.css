@@ -7,20 +7,10 @@ body {
 }
 
 #date {
-  position: relative;
-  left: 380%;
+  transform: translate(0%, 210%);
   font-size: 20px;
   font-weight: bold;
-}
-
-h1 {
   color: white;
-  text-align: center;
-  position: relative;
-  margin: 0;
-  width: 100%;
-  position: absolute;
-  transform: translate(0%, 10%);
 }
 
 .layout1 {
@@ -31,6 +21,7 @@ h1 {
   color: white;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.589);
+  
 }
 
 .layout1 input {
@@ -43,7 +34,7 @@ h1 {
   outline: none;
 }
 
-input #search {
+input#search {
   text-align: center;
 }
 
@@ -51,15 +42,8 @@ button {
   font-size: 20px;
   border: 0;
   background-color: transparent;
-  margin: 0px 0px 0px -16px;
+  margin-left: -16px;
   color: white;
-}
-
-.layout2 {
-  float: right;
-  color: rgb(255, 255, 255);
-  background-color: var(--background-color);
-  display: var(--display);
 }
 
 #weather-container, input, button {
@@ -69,6 +53,27 @@ button {
 
 #weather-container {
   font-size: 25px;
+  visibility: hidden;
+}
+
+.layout2 {
+  float: right;
+  color: rgb(255, 255, 255);
+  background-color: var(--background-color);
+  display: var(--display);
+}
+
+.weather-info {
+  transform: translate(0%, 150%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+#search-btn:focus + #weather-container2 + .weather-info {
+  visibility: visible;
 }
 
 #weather-container2 {
@@ -77,11 +82,12 @@ button {
   display: flex;
   align-items: center;
   position: absolute;
-  width: 450px;
-  height: 120px;
   top: 90%;
   left: 80%;
   transform: translate(-50%, -50%);
+  padding: 20px;
+  gap: 15px;
+  visibility: hidden;
 }
 
 #weather-container2 i {
@@ -89,11 +95,11 @@ button {
 }
 
 #weather-container2 h2 {
-  margin: 10px;
+  margin: 0px;
   font-size: 35px;
 }
 
 #weather-container2 p {
-  margin: 20px;
+  margin: 0px;
   font-size: 50px;
 }

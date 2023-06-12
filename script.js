@@ -1,5 +1,5 @@
 const weatherContainer = document.getElementById('weather-container');
-const minidisplay = document.getElementById("weather-container2");
+const weatherContainer2 = document.getElementById('weather-container2');
 const locationInput = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
 const dateElement = document.getElementById('date');
@@ -8,95 +8,83 @@ searchBtn.addEventListener('click', function() {
   const location = locationInput.value;
   const apiKey = '4979309d527f606942cb791496ed23b5';
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=${apiKey}&units=metric`;
-
+  
   fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      displayWeather(data);
-      miniDisplay(data);
-      setWeatherBackground(data.weather[0].icon);
-      displayDate();
+  .then(response => response.json())
+  .then(data => {
+    displayWeather(data);
+    miniDisplay(data);
+    setWeatherBackground(data.weather[0].icon);
+    displayDate();
+    
+    console.log(data);
+  })
+  .catch(error => {
+    weatherContainer.innerHTML = '오류 발생: ' + error;
+  });
+});
 
-      console.log(data);
-    })
-    .catch(error => {
-      weatherContainer.innerHTML = '오류 발생: ' + error;
-    });
+searchBtn.addEventListener('click', function() {
+  weatherContainer2.style.visibility = 'visible';
+});
+
+searchBtn.addEventListener('click', function() {
+  weatherContainer.style.visibility = 'visible';
 });
 
 function miniDisplay(data) {
+  
+  const cityName = document.getElementById('cityName');
+  const temperature = document.getElementById('temp');
+  const weatherIcon = document.getElementById('Icon');
+  
   const { name, main, weather } = data;
-
-  const cityName = document.createElement('h2');
-  cityName.textContent = name;
-
-  const temperature = document.createElement('p');
-  temperature.innerHTML = `${main.temp}°C`;
-
-  const weatherIcon = document.createElement('i');
+  
+  cityName.textContent = `${name}`;
+  temperature.textContent = `${Math.round(main.temp)}°C`;
+  
   const iconCode = weather[0].icon;
   const iconClass = getWeatherIconClass(iconCode);
-  weatherIcon.className = iconClass;
-
-  minidisplay.innerHTML = '';
-  minidisplay.appendChild(temperature);
-  minidisplay.appendChild(cityName);
-  minidisplay.appendChild(weatherIcon);
+  weatherIcon.className = `fas ${iconClass}`;
 }
 
 function displayWeather(data) {
-  const { main, wind, weather, clouds } = data;
-
-  const temperature_Max = document.createElement('p');
-  temperature_Max.innerHTML = `<i class="fas fa-temperature-high"></i> ${main.temp_max} °C`;
-
-  const temperature_Min = document.createElement('p');
-  temperature_Min.innerHTML = `<i class="fas fa-temperature-low"></i> ${main.temp_min} °C`;
-
-  const Wind = document.createElement('p');
-  Wind.innerHTML = `<i class="fas fa-wind"></i> ${wind.speed} m/s`;
-
-  const weatherIcon = document.createElement('i');
-  const iconCode = weather[0].icon;
-  const iconClass = getWeatherIconClass(iconCode);
-  weatherIcon.className = iconClass;
-
-  const cloudiness = document.createElement('p');
-  cloudiness.innerHTML = `<i class="fa-solid fa-cloud"></i> ${clouds.all}%`;
-
-  const humidity = document.createElement('p');
-  humidity.innerHTML = `<i class="fas fa-tint"></i> ${main.humidity}%`;
-
-  weatherContainer.innerHTML = '';
-  weatherContainer.appendChild(weatherIcon);
-  weatherContainer.appendChild(temperature_Max);
-  weatherContainer.appendChild(temperature_Min);
-  weatherContainer.appendChild(Wind);
-  weatherContainer.appendChild(cloudiness);
-  weatherContainer.appendChild(humidity);
+  
+  const maxTempElement = document.getElementById('max-temp');
+  const minTempElement = document.getElementById('min-temp');
+  const windElement = document.getElementById('wind');
+  const humidityElement = document.getElementById('humidity');
+  const cloudsElement = document.getElementById('clouds');
+  
+  const { main, wind, clouds } = data;
+  
+  maxTempElement.textContent = ` ${main.temp_max} °C`;
+  minTempElement.textContent = ` ${main.temp_min} °C`;
+  windElement.textContent = ` ${wind.speed} m/s`;
+  humidityElement.textContent = ` ${main.humidity} %`;
+  cloudsElement.textContent = ` ${clouds.all} %`;
 }
-
 
 function setWeatherBackground(iconCode) {
   const weatherBackgroundMap = {
-    '01d': 'url(img/clearSky-d.jpg)',
-    '01n': 'url(img/clearSky-n.jpg)',
-    '02d': 'url(img/weather-few-cloud.jpg)',
-    '02n': 'url(img/weather-cloudy.jpg)',
-    '03d': 'url(img/weather-cloudy.jpg)',
-    '03n': 'url(img/weather-cloudy.jpg)',
-    '04d': 'url(img/weather-cloudy.jpg)',
-    '04n': 'url(img/weather-cloudy.jpg)',
-    '09d': 'url(path/to/showers-background.jpg)',
-    '09n': 'url(path/to/showers-background.jpg)',
-    '10n': 'url(img/weather-rain.jpg)',
-    '10d': 'url(img/weather-rain.jpg)',
-    '11d': 'url(path/to/thunderstorm-background.jpg)',
-    '11n': 'url(path/to/thunderstorm-background.jpg)',
-    '13d': 'url(path/to/snowy-background.jpg)',
-    '13n': 'url(path/to/snowy-background.jpg)',
-    '50d': 'url(img/weather-misty.jpg)',
-    '50n': 'url(img/weather-misty.jpg)',
+    '01d': 'url(img/01d.jpg)',
+    '01n': 'url(img/01n.jpg)',
+    '02d': 'url(img/02d.jpg)',
+    '02n': 'url(img/02n.jpg)',
+    '03d': 'url(img/03d.jpg)',
+    '03n': 'url(img/03n.jpg)',
+    '04d': 'url(img/04d.jpg)',
+    '04n': 'url(img/04n.jpg)',
+    '09d': 'url(img/10d.jpg)',
+    '09n': 'url(img/10d.jpg)',
+    '10d': 'url(img/10d.jpg)',
+    '10n': 'url(img/10d.jpg)',
+    '11d': 'url(img/01d.jpg)',
+    '11n': 'url(img/01d.jpg)',
+    '13d': 'url(img/13d.jpg)',
+    '13n': 'url(img/13d.jpg)',
+    '50d': 'url(img/50d.jpg)',
+    '50n': 'url(img/50d.jpg)',
   };
 
   const backgroundUrl = weatherBackgroundMap[iconCode] || '';
@@ -105,7 +93,7 @@ function setWeatherBackground(iconCode) {
   const currentBackgroundUrl = bodyElement.style.backgroundImage;
 
   if (backgroundUrl !== currentBackgroundUrl) {
-    bodyElement.style.backgroundImage.opacity = 1;
+    bodyElement.style.backgroundImage.opacity = 0;
     setTimeout(() => {
       bodyElement.style.backgroundImage = backgroundUrl;
       bodyElement.style.backgroundImage.opacity = 1;
