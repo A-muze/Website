@@ -5,7 +5,7 @@ const searchBtn = document.getElementById('search-btn');
 
 searchBtn.addEventListener('click', function() {
   const location = locationInput.value;
-  const apiKey = 'API_Key';
+  const apiKey = '4979309d527f606942cb791496ed23b5';
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=${apiKey}&units=metric`;
   
   fetch(apiUrl)
