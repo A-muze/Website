@@ -2,11 +2,10 @@ const weatherContainer = document.getElementById('weather-container');
 const weatherContainer2 = document.getElementById('weather-container2');
 const locationInput = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
-const dateElement = document.getElementById('date');
 
 searchBtn.addEventListener('click', function() {
   const location = locationInput.value;
-  const apiKey = '4979309d527f606942cb791496ed23b5';
+  const apiKey = 'API_Key';
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=${apiKey}&units=metric`;
   
   fetch(apiUrl)
@@ -15,7 +14,6 @@ searchBtn.addEventListener('click', function() {
     displayWeather(data);
     miniDisplay(data);
     setWeatherBackground(data.weather[0].icon);
-    displayDate();
     
     console.log(data);
   })
@@ -124,11 +122,4 @@ function getWeatherIconClass(iconCode) {
   };
 
   return weatherIconMap[iconCode] || '';
-}
-
-function displayDate() {
-  const currentDate = new Date();
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = currentDate.toLocaleDateString(undefined, options);
-  dateElement.textContent = formattedDate;
 }
